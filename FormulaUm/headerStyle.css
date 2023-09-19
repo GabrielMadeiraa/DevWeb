@@ -1,0 +1,43 @@
+
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+header { 
+    position: fixed;
+}
+
+a {
+     color: white;
+     font-weight: bolder; 
+} 
+
+img {
+    overflow-clip-margin: content-box;
+    overflow: clip;
+    width: 200px;
+    margin-left: 45%;
+    background-color: #fbf3f3;
+}
+
+.img {
+    background-color: #fbf3f3;
+}
+
+th {
+  background-color: #e10600;
+  border-left: 1px solid #dddddd;
+  text-align: center;
+  padding: 8px;
+  height: 75px;
+}
+
+.sumario {
+    border-left: 0px;
+  }
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
