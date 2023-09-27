@@ -1,6 +1,6 @@
 <?php
 // Verifica se o formulário foi enviado
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+/*if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   // Obtém os dados do formulário
   $name = $_POST['name'];
   $email = $_POST['email'];
@@ -23,5 +23,34 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   // Redireciona para uma página de confirmação
   header('Location: confirmacao.html');
   exit;
-}
+}*/
 ?>
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Confirmação de Cadastro - Fórmula 1</title>
+</head>
+<body>
+  <h1>Confirmação de Cadastro</h1>
+  
+  <?php
+  if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $name = $_POST['name'];
+    $email = $_POST['email'];
+    $country = $_POST['country'];
+    $team = $_POST['team'];
+    $experience = $_POST['experience'];
+    
+    // Exibe os dados do formulário
+    echo "<p>O seu cadastro foi enviado com sucesso! Agradecemos por se cadastrar em nosso site.</p>";
+    echo "<p>Nome: $name</p>";
+    echo "<p>Email: $email</p>";
+    echo "<p>País: $country</p>";
+    echo "<p>Equipe favorita: $team</p>";
+    echo "<p>Experiência: $experience</p>";
+  }
+  ?>
+</body>
+</html>
