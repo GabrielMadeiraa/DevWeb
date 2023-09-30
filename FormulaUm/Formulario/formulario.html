@@ -7,7 +7,13 @@
   <link rel="stylesheet" href="CSS/formulario.css">
 </head>
 <body>  
-
+  <img class="logo" src="../logo.png" alt="Formula1">
+  <table>
+    <th class="sumario"> <a href="../home.html"> Home</a> </th> 
+    <th> <a href="../Equipes/equipes.html"> Equipes</a> </th>
+    <th> <a href="../Pistas/pistas.html"> Pistas</a> </th> 
+    <th> <a href="../Formulario/formulario.html"> Contato</a> </th>  
+  </table>
   <h1>Contato Fórmula 1</h1>
 
   <form action="processar-formulario.php" method="POST">
@@ -22,10 +28,15 @@
 
     <label for="equipe">Equipe favorita:</label>
     <select id="equipe" name="equipe">
-      <option value="mercedes">Mercedes</option>
+      <option value="alfa">Alfa Romeo</option>
+      <option value="alphaTauri">AlphaTauri</option>
+      <option value="alpine">Alpine</option>
+      <option value="aston">Aston Martin</option>
       <option value="ferrari">Ferrari</option>
+      <option value="Haas">Haas</option>
+      <option value="mercedesAmg">Mercedes-AMG Petronas</option>
       <option value="redbull">Red Bull Racing</option>
-      <option value="mclaren">McLaren</option>
+      <option value="williams">Williams</option>
       <!-- Adicione outras equipes da Fórmula 1 aqui -->
     </select>
 
