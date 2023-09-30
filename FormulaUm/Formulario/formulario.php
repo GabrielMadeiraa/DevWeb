@@ -30,27 +30,37 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>Confirmação de Cadastro - Fórmula 1</title>
+  <title>Confirmação de Contato - Fórmula 1</title>
 </head>
 <body>
-  <h1>Confirmação de Cadastro</h1>
+  <h1>Confirmação de Contato</h1>
   
   <?php
-  if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $name = $_POST['name'];
-    $email = $_POST['email'];
-    $country = $_POST['country'];
-    $team = $_POST['team'];
-    $experience = $_POST['experience'];
-    
-    // Exibe os dados do formulário
-    echo "<p>O seu cadastro foi enviado com sucesso! Agradecemos por se cadastrar em nosso site.</p>";
-    echo "<p>Nome: $name</p>";
-    echo "<p>Email: $email</p>";
-    echo "<p>País: $country</p>";
-    echo "<p>Equipe favorita: $team</p>";
-    echo "<p>Experiência: $experience</p>";
-  }
+    // Verifica se o formulário foi enviado
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+      // Coleta os valores enviados pelo formulário
+      $nome = $_POST["nome"];
+      $email = $_POST["email"];
+      $idade = $_POST["idade"];
+      $equipe = $_POST["equipe"];
+      $comentario = $_POST["comentario"];
+      $numero = $_POST["numero"];
+      $cor = $_POST["cor"];
+      $url = $_POST["url"];
+
+      // Processa os dados ou realiza outras ações necessárias
+      // ...
+
+      // Exemplo de exibição dos dados recebidos
+      echo "Nome: " . $nome . "<br>";
+      echo "E-mail: " . $email . "<br>";
+      echo "Idade: " . $idade . "<br>";
+      echo "Equipe favorita: " . $equipe . "<br>";
+      echo "Comentário: " . $comentario . "<br>";
+      echo "Número favorito: " . $numero . "<br>";
+      echo "Cor favorita: " . $cor . "<br>";
+      echo "Website favorito: " . $url . "<br>";
+    }
   ?>
 </body>
 </html>
