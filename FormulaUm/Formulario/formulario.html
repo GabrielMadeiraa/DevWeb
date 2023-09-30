@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formulário de Fórmula 1</title>
+  <link rel="stylesheet" href="CSS/formulario.css">
+</head>
+<body>  
+
+  <h1>Contato Fórmula 1</h1>
+
+  <form action="processar-formulario.php" method="POST">
+    <label for="nome">Nome:</label>
+    <input type="text" id="nome" name="nome" required>
+
+    <label for="email">E-mail:</label>
+    <input type="email" id="email" name="email" required>
+
+    <label for="idade">Idade:</label>
+    <input type="number" id="idade" name="idade" required>
+
+    <label for="equipe">Equipe favorita:</label>
+    <select id="equipe" name="equipe">
+      <option value="mercedes">Mercedes</option>
+      <option value="ferrari">Ferrari</option>
+      <option value="redbull">Red Bull Racing</option>
+      <option value="mclaren">McLaren</option>
+      <!-- Adicione outras equipes da Fórmula 1 aqui -->
+    </select>
+
+    <label for="comentario">Comentário:</label>
+    <textarea id="comentario" name="comentario"></textarea>
+
+    <label for="numero">Número favorito:</label>
+    <input type="number" id="numero" name="numero" required>
+
+    <label for="cor">Cor favorita:</label>
+    <input type="color" id="cor" name="cor" required>
+
+    <label for="url">Website favorito:</label>
+    <input type="url" id="url" name="url" required>
+
+    <input type="submit" value="Enviar">
+  </form>
+</body>
+</html>
