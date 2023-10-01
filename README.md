@@ -2,7 +2,7 @@
 Projeto Disciplina de Desenvolvimento Web
 
 ## Objetivo
-Criação de um site de sobre o esporte Fórmula 1 
+Este projeto de desenvolvimento web sobre a Fórmula 1 consiste em um site com quatro páginas principais: "Sobre Nós", "Equipes", "Home" e "Contato". O site é desenvolvido usando HTML5 e CSS.
 
 ### Prototipo
 
