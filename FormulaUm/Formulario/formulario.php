@@ -36,30 +36,30 @@
   <h1>Confirmação de Contato</h1>
   
   <?php
-    // Verifica se o formulário foi enviado
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-      // Coleta os valores enviados pelo formulário
-      $nome = $_POST["nome"];
-      $email = $_POST["email"];
-      $idade = $_POST["idade"];
-      $equipe = $_POST["equipe"];
-      $comentario = $_POST["comentario"];
-      $numero = $_POST["numero"];
-      $cor = $_POST["cor"];
-      $url = $_POST["url"];
+        // Recupera os valores enviados pelo formulário
+        $nome = $_POST["nome"];
+        $email = $_POST["email"];
+        $idade = $_POST["idade"];
+        $equipe = $_POST["equipe"];
+        $comentario = $_POST["comentario"];
+        $numero = $_POST["numero"];
+        $cor = $_POST["cor"];
+        $piloto = $_POST["pilotos"];
 
-      // Processa os dados ou realiza outras ações necessárias
-      // ...
+        // Faça o que desejar com os valores recebidos
+        // Por exemplo, você pode armazená-los em um banco de dados ou enviá-los por e-mail
 
-      // Exemplo de exibição dos dados recebidos
-      echo "Nome: " . $nome . "<br>";
-      echo "E-mail: " . $email . "<br>";
-      echo "Idade: " . $idade . "<br>";
-      echo "Equipe favorita: " . $equipe . "<br>";
-      echo "Comentário: " . $comentario . "<br>";
-      echo "Número favorito: " . $numero . "<br>";
-      echo "Cor favorita: " . $cor . "<br>";
-      echo "Website favorito: " . $url . "<br>";
+        // Exemplo de exibição dos valores recebidos
+        echo "<h2>Valores Recebidos:</h2>";
+        echo "Nome: " . $nome . "<br>";
+        echo "E-mail: " . $email . "<br>";
+        echo "Idade: " . $idade . "<br>";
+        echo "Equipe favorita: " . $equipe . "<br>";
+        echo "Comentário: " . $comentario . "<br>";
+        echo "Número favorito: " . $numero . "<br>";
+        echo "Cor favorita: " . $cor . "<br>";
+        echo "Piloto favorito: " . $piloto . "<br>";
     }
   ?>
 </body>
