@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formulário de Fórmula 1</title>
+  <link rel="stylesheet" href="CSS/formulario.css">
+</head>
+<body>  
+  <img class="logo" src="../logo.png" alt="Formula1">
+  <table>
+    <tr>
+      <th class="sumario"> <a href="../home.html"> Home</a> </th> 
+      <th> <a href="../Equipes/equipes.html"> Equipes</a> </th>
+      <th><a href="../Sobre/sobre.html"> Sobre Nós</a></th> 
+      <th> <a href="../Formulario/formulario.html"> Contato</a> </th>   
+    </tr>
+  </table> 
+  <h1>Blog Fórmula 1</h1>
+  <body>
+    <h1>Blog - Fórmula 1</h1>
+
+    <div id="posts-container"></div>
+
+    <script>
+        // Função para carregar os posts do servidor
+        function loadPosts() {
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', 'api.php?action=get_posts', true);
+            xhr.onload = function () {
+                if (xhr.status === 200) {
+                    var posts = JSON.parse(xhr.responseText);
+                    var postsContainer = document.getElementById('posts-container');
+                    postsContainer.innerHTML = '';
+
+                    posts.forEach(function (post) {
+                        var postElement = document.createElement('div');
+                        postElement.classList.add('post');
+
+                        var postTitle = document.createElement('h2');
+                        postTitle.classList.add('post-title');
+                        postTitle.textContent = post.title;
+
+                        var postContent = document.createElement('p');
+                        postContent.classList.add('post-content');
+                        postContent.textContent = post.content;
+
+                        postElement.appendChild(postTitle);
+                        postElement.appendChild(postContent);
+
+                        postsContainer.appendChild(postElement);
+                    });
+
+                    if (posts.length === 0) {
+                        var noPostsMessage = document.createElement('p');
+                        noPostsMessage.textContent = 'Nenhum post encontrado.';
+                        postsContainer.appendChild(noPostsMessage);
+                    }
+                }
+            };
+            xhr.send();
+        }
+
+        // Carregar os posts ao carregar a página
+        document.addEventListener('DOMContentLoaded', function () {
+            loadPosts();
+        });
+    </script>
+</body>
+</html>
