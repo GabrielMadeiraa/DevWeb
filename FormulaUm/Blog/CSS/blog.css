@@ -1,0 +1,100 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: white;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 10px;
+  }
+  
+  input,
+  select,
+  textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  
+  input[type="submit"] {
+    background-color: #4CAF50;
+    color: #fff;
+    cursor: pointer;
+  }
+  
+  table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  header { 
+      position: fixed;
+  }
+  
+  a {
+       color: white;
+       font-weight: bolder; 
+  } 
+  
+  .logo {
+      overflow: clip;
+      width: 150px;
+      margin-left: 45%;
+      display: block;
+      background-color: white;
+  }
+  
+  .carros {
+    padding: 1px;
+    width: 100%;
+    padding-top: 20px;
+    margin: auto;
+    display: block;
+    background-color: white;
+  }
+  
+  th {
+    background-color: #e10600;
+    border-left: 1px solid white;
+    text-align: center;
+    font-size: xx-large;
+    padding: 1px;
+    height: 75px;
+  }
+  
+  td {
+    border-left: 1px solid white;
+    text-align: justify;
+    font-weight: bold;
+    font-size: 30px;
+    line-height: 50px;
+    padding: 1px;
+    width: 10%;
+  }
+  
+  .sumario {
+      border-left: 0px;
+    }
+  
+  .historia {
+    width: 95%;
+    margin: auto;
+    padding: auto;
+  }
+  
+  tr:nth-child(even) {
+    background-color: white;
+  }
+
+  h1{
+    padding-top: 50px;
+    text-align: center;
+    color: #e10600;
+    font-weight: bolder;
+    font-size: 40px;
+  }
+  

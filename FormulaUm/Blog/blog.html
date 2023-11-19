@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Formulário de Fórmula 1</title>
-  <link rel="stylesheet" href="CSS/formulario.css">
+  <title>Blog de Fórmula 1</title>
+  <link rel="stylesheet" href="CSS/blog.css">
 </head>
 <body>  
   <img class="logo" src="../logo.png" alt="Formula1">
@@ -14,19 +14,29 @@
       <th> <a href="../Equipes/equipes.html"> Equipes</a> </th>
       <th><a href="../Sobre/sobre.html"> Sobre Nós</a></th> 
       <th> <a href="../Formulario/formulario.html"> Contato</a> </th>   
+      <th> <a href="blog.html"> Blog</a> </th>   
+
     </tr>
   </table> 
-  <h1>Blog Fórmula 1</h1>
-  <body>
     <h1>Blog - Fórmula 1</h1>
 
     <div id="posts-container"></div>
 
+    <form id="new-post-form">
+        <h2>Novo Post</h2>
+        <input type="text" id="title-input" placeholder="Título" required>
+        <textarea id="content-input" placeholder="Conteúdo" required></textarea>
+        <button type="submit">Publicar</button>
+    </form>
+
     <script>
+        // Defina a URL da API PHP
+        var apiURL = 'https://exemplo.com/api.php';
+
         // Função para carregar os posts do servidor
         function loadPosts() {
             var xhr = new XMLHttpRequest();
-            xhr.open('GET', 'api.php?action=get_posts', true);
+            xhr.open('GET', apiURL + '?action=get_posts', true);
             xhr.onload = function () {
                 if (xhr.status === 200) {
                     var posts = JSON.parse(xhr.responseText);
@@ -60,6 +70,36 @@
             };
             xhr.send();
         }
+
+        // Função para criar um novo post
+        function createPost(title, content) {
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', apiURL, true);
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            xhr.onload = function () {
+                if (xhr.status === 201) {
+                    // Limpar os campos do formulário
+                    document.getElementById('title-input').value = '';
+                    document.getElementById('content-input').value = '';
+
+                    // Recarregar os posts para exibir o novo post criado
+                    loadPosts();
+                }
+            };
+            xhr.send('action=create_post&title=' + encodeURIComponent(title) + '&content=' + encodeURIComponent(content));
+        }
+
+        // Evento de envio do formulário
+        document.getElementById('new-post-form').addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            var title = document.getElementById('title-input').value;
+            var content = document.getElementById('content-input').value;
+
+            if (title.trim() !== '' && content.trim() !== '') {
+                createPost(title, content);
+            }
+        });
 
         // Carregar os posts ao carregar a página
         document.addEventListener('DOMContentLoaded', function () {
