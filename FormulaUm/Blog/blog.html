@@ -31,101 +31,155 @@
   <script>
     // Defina a URL da API PHP
     var apiURL = 'http://localhost/projeto/DevWebCRUD/api.php';
+    var editPopup = null;
 
     // Função para carregar os posts do servidor
     function loadPosts() {
-      var xhr = new XMLHttpRequest();
-      xhr.open('GET', apiURL + '?action=get_posts', true);
-      xhr.onload = function () {
-        if (xhr.status === 200) {
-          var posts = JSON.parse(xhr.responseText);
-          var postsContainer = document.getElementById('posts-container');
-          postsContainer.innerHTML = '';
+  var xhr = new XMLHttpRequest();
+  xhr.open('GET', apiURL + '?action=get_posts', true);
+  xhr.onload = function () {
+    if (xhr.status === 200) {
+      var posts = JSON.parse(xhr.responseText);
+      var postsContainer = document.getElementById('posts-container');
+      postsContainer.innerHTML = '';
 
-          posts.forEach(function (post) {
-            var postElement = document.createElement('div');
-            postElement.classList.add('post');
+      posts.forEach(function (post) {
+        var postElement = document.createElement('div');
+        postElement.classList.add('post');
 
-            var postTitle = document.createElement('h2');
-            postTitle.classList.add('post-title');
-            postTitle.textContent = post.title;
+        var postTitle = document.createElement('h2');
+        postTitle.classList.add('post-title');
+        postTitle.textContent = post.title;
 
-            var postContent = document.createElement('p');
-            postContent.classList.add('post-content');
-            postContent.textContent = post.content;
+        var postContent = document.createElement('p');
+        postContent.classList.add('post-content');
+        postContent.textContent = post.content;
 
-            var deleteButton = document.createElement('button');
-            deleteButton.classList.add('delete-button');
-            deleteButton.textContent = 'X';
-            deleteButton.addEventListener('click', function () {
-              deletePost(post.id);
-            });
+        var deleteButton = document.createElement('button');
+        deleteButton.classList.add('delete-button');
+        deleteButton.textContent = 'X';
+        deleteButton.addEventListener('click', function () {
+          deletePost(post.id);
+        });
 
-            postElement.appendChild(postTitle);
-            postElement.appendChild(postContent);
-            postElement.appendChild(deleteButton);
-
-            postsContainer.appendChild(postElement);
-          });
-
-          if (posts.length === 0) {
-            var noPostsMessage = document.createElement('p');
-            noPostsMessage.textContent = 'Nenhum post encontrado.';
-            postsContainer.appendChild(noPostsMessage);
+        var editButton = document.createElement('button');
+        editButton.classList.add('edit-button');
+        editButton.textContent = 'Editar';
+        editButton.addEventListener('click', function () {
+          if (!editPopup) {
+            openEditPopup(post);
           }
-        }
-      };
-      xhr.send();
+        });
+
+        postElement.appendChild(postTitle);
+        postElement.appendChild(postContent);
+        postElement.appendChild(deleteButton);
+        postElement.appendChild(editButton);
+
+        postsContainer.appendChild(postElement);
+      });
+
+      if (posts.length === 0) {
+        var noPostsMessage = document.createElement('p');
+        noPostsMessage.textContent = 'Nenhum post encontrado.';
+        postsContainer.appendChild(noPostsMessage);
+      }
     }
+  };
+  xhr.send();
+}
 
-    // Função para criar um novo post
-    function createPost(title, content) {
-      var xhr = new XMLHttpRequest();
-      xhr.open('POST', apiURL, true);
-      xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-      xhr.onload = function () {
-        if (xhr.status === 201) {
-          // Limpar os campos do formulário
-          document.getElementById('title-input').value = '';
-          document.getElementById('content-input').value = '';
-
-          // Recarregar os posts para exibir o novo post criado
-          loadPosts();
-        }
-      };
-      xhr.send('action=create_post&title=' + encodeURIComponent(title) + '&content=' + encodeURIComponent(content));
+function createPost(title, content) {
+  var xhr = new XMLHttpRequest();
+  xhr.open('POST', apiURL, true);
+  xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+  xhr.onload = function () {
+    if (xhr.status === 201) {
+      document.getElementById('title-input').value = '';
+      document.getElementById('content-input').value = '';
+      loadPosts();
     }
+  };
+  xhr.send('action=create_post&title=' + encodeURIComponent(title) + '&content=' + encodeURIComponent(content));
+}
 
-    // Função para excluir um post
-    function deletePost(postId) {
+function deletePost(postId) {
   var xhr = new XMLHttpRequest();
   xhr.open('DELETE', apiURL, true);
   xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
   xhr.onload = function () {
     if (xhr.status === 200) {
-      // Recarregar os posts após excluir o post
       loadPosts();
     }
   };
   xhr.send('post_id=' + encodeURIComponent(postId));
 }
 
-    // Evento de envio do formulário
-    document.getElementById('new-post-form').addEventListener('submit', function (event) {
-      event.preventDefault();
-
-      var title = document.getElementById('title-input').value;
-      var content = document.getElementById('content-input').value;
-
-      if (title.trim() !== '' && content.trim() !== '') {
-        createPost(title, content);
-      }
-    });
-
-    // Carregar os posts ao carregara página
-    document.addEventListener('DOMContentLoaded', function () {
+function editPost(postId, newTitle, newContent) {
+  var xhr = new XMLHttpRequest();
+  xhr.open('PUT', apiURL, true);
+  xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+  xhr.onload = function () {
+    if (xhr.status === 200) {
       loadPosts();
-    });
+    }
+  };
+  var data = 'post_id=' + encodeURIComponent(postId) + '&title=' + encodeURIComponent(newTitle) + '&content=' + encodeURIComponent(newContent);
+  xhr.send(data);
+}
+
+function openEditPopup(post) {
+  editPopup = document.createElement('div');
+  editPopup.classList.add('edit-popup');
+
+  var titleInput = document.createElement('input');
+  titleInput.type = 'text';
+  titleInput.value = post.title;
+  editPopup.appendChild(titleInput);
+
+  var contentInput = document.createElement('textarea');
+  contentInput.value = post.content;
+  editPopup.appendChild(contentInput);
+
+  var saveButton = document.createElement('button');
+  saveButton.textContent = 'Salvar';
+  saveButton.addEventListener('click', function () {
+    var newTitle = titleInput.value;
+    var newContent = contentInput.value;
+    editPost(post.id, newTitle, newContent);
+    closeEditPopup();
+  });
+  editPopup.appendChild(saveButton);
+
+  var cancelButton = document.createElement('button');
+  cancelButton.textContent = 'Cancelar';
+  cancelButton.addEventListener('click', closeEditPopup);
+  editPopup.appendChild(cancelButton);
+
+  document.body.appendChild(editPopup);
+}
+
+function closeEditPopup() {
+  if (editPopup) {
+    editPopup.remove();
+    editPopup = null;
+  }
+}
+
+document.getElementById('new-post-form').addEventListener('submit', function (event) {
+  event.preventDefault();
+
+  var title = document.getElementById('title-input').value;
+  var content = document.getElementById('content-input').value;
+
+  if (title.trim() !== '' && content.trim() !== '') {
+    createPost(title, content);
+  }
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+  loadPosts();
+});
   </script>
 </body>
 </html>
