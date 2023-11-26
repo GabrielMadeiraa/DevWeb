@@ -54,8 +54,16 @@
             postContent.classList.add('post-content');
             postContent.textContent = post.content;
 
+            var deleteButton = document.createElement('button');
+            deleteButton.classList.add('delete-button');
+            deleteButton.textContent = 'X';
+            deleteButton.addEventListener('click', function () {
+              deletePost(post.id);
+            });
+
             postElement.appendChild(postTitle);
             postElement.appendChild(postContent);
+            postElement.appendChild(deleteButton);
 
             postsContainer.appendChild(postElement);
           });
@@ -88,6 +96,20 @@
       xhr.send('action=create_post&title=' + encodeURIComponent(title) + '&content=' + encodeURIComponent(content));
     }
 
+    // Função para excluir um post
+    function deletePost(postId) {
+  var xhr = new XMLHttpRequest();
+  xhr.open('DELETE', apiURL, true);
+  xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+  xhr.onload = function () {
+    if (xhr.status === 200) {
+      // Recarregar os posts após excluir o post
+      loadPosts();
+    }
+  };
+  xhr.send('post_id=' + encodeURIComponent(postId));
+}
+
     // Evento de envio do formulário
     document.getElementById('new-post-form').addEventListener('submit', function (event) {
       event.preventDefault();
@@ -100,7 +122,7 @@
       }
     });
 
-    // Carregar os posts ao carregar a página
+    // Carregar os posts ao carregara página
     document.addEventListener('DOMContentLoaded', function () {
       loadPosts();
     });
