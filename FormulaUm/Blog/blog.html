@@ -15,96 +15,95 @@
       <th><a href="../Sobre/sobre.html"> Sobre Nós</a></th> 
       <th> <a href="../Formulario/formulario.html"> Contato</a> </th>   
       <th> <a href="blog.html"> Blog</a> </th>   
-
     </tr>
   </table> 
-    <h1>Blog - Fórmula 1</h1>
+  <h1>Blog - Fórmula 1</h1>
 
-    <div id="posts-container"></div>
+  <div id="posts-container"></div>
 
-    <form id="new-post-form">
-        <h2>Novo Post</h2>
-        <input type="text" id="title-input" placeholder="Título" required>
-        <textarea id="content-input" placeholder="Conteúdo" required></textarea>
-        <button type="submit">Publicar</button>
-    </form>
+  <form id="new-post-form">
+    <h2>Novo Post</h2>
+    <input type="text" id="title-input" placeholder="Título" required>
+    <textarea id="content-input" placeholder="Conteúdo" required></textarea>
+    <button type="submit">Publicar</button>
+  </form>
 
-    <script>
-        // Defina a URL da API PHP
-        var apiURL = 'https://exemplo.com/api.php';
+  <script>
+    // Defina a URL da API PHP
+    var apiURL = 'http://localhost/projeto/DevWebCRUD/api.php';
 
-        // Função para carregar os posts do servidor
-        function loadPosts() {
-            var xhr = new XMLHttpRequest();
-            xhr.open('GET', apiURL + '?action=get_posts', true);
-            xhr.onload = function () {
-                if (xhr.status === 200) {
-                    var posts = JSON.parse(xhr.responseText);
-                    var postsContainer = document.getElementById('posts-container');
-                    postsContainer.innerHTML = '';
+    // Função para carregar os posts do servidor
+    function loadPosts() {
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET', apiURL + '?action=get_posts', true);
+      xhr.onload = function () {
+        if (xhr.status === 200) {
+          var posts = JSON.parse(xhr.responseText);
+          var postsContainer = document.getElementById('posts-container');
+          postsContainer.innerHTML = '';
 
-                    posts.forEach(function (post) {
-                        var postElement = document.createElement('div');
-                        postElement.classList.add('post');
+          posts.forEach(function (post) {
+            var postElement = document.createElement('div');
+            postElement.classList.add('post');
 
-                        var postTitle = document.createElement('h2');
-                        postTitle.classList.add('post-title');
-                        postTitle.textContent = post.title;
+            var postTitle = document.createElement('h2');
+            postTitle.classList.add('post-title');
+            postTitle.textContent = post.title;
 
-                        var postContent = document.createElement('p');
-                        postContent.classList.add('post-content');
-                        postContent.textContent = post.content;
+            var postContent = document.createElement('p');
+            postContent.classList.add('post-content');
+            postContent.textContent = post.content;
 
-                        postElement.appendChild(postTitle);
-                        postElement.appendChild(postContent);
+            postElement.appendChild(postTitle);
+            postElement.appendChild(postContent);
 
-                        postsContainer.appendChild(postElement);
-                    });
+            postsContainer.appendChild(postElement);
+          });
 
-                    if (posts.length === 0) {
-                        var noPostsMessage = document.createElement('p');
-                        noPostsMessage.textContent = 'Nenhum post encontrado.';
-                        postsContainer.appendChild(noPostsMessage);
-                    }
-                }
-            };
-            xhr.send();
+          if (posts.length === 0) {
+            var noPostsMessage = document.createElement('p');
+            noPostsMessage.textContent = 'Nenhum post encontrado.';
+            postsContainer.appendChild(noPostsMessage);
+          }
         }
+      };
+      xhr.send();
+    }
 
-        // Função para criar um novo post
-        function createPost(title, content) {
-            var xhr = new XMLHttpRequest();
-            xhr.open('POST', apiURL, true);
-            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-            xhr.onload = function () {
-                if (xhr.status === 201) {
-                    // Limpar os campos do formulário
-                    document.getElementById('title-input').value = '';
-                    document.getElementById('content-input').value = '';
+    // Função para criar um novo post
+    function createPost(title, content) {
+      var xhr = new XMLHttpRequest();
+      xhr.open('POST', apiURL, true);
+      xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+      xhr.onload = function () {
+        if (xhr.status === 201) {
+          // Limpar os campos do formulário
+          document.getElementById('title-input').value = '';
+          document.getElementById('content-input').value = '';
 
-                    // Recarregar os posts para exibir o novo post criado
-                    loadPosts();
-                }
-            };
-            xhr.send('action=create_post&title=' + encodeURIComponent(title) + '&content=' + encodeURIComponent(content));
+          // Recarregar os posts para exibir o novo post criado
+          loadPosts();
         }
+      };
+      xhr.send('action=create_post&title=' + encodeURIComponent(title) + '&content=' + encodeURIComponent(content));
+    }
 
-        // Evento de envio do formulário
-        document.getElementById('new-post-form').addEventListener('submit', function (event) {
-            event.preventDefault();
+    // Evento de envio do formulário
+    document.getElementById('new-post-form').addEventListener('submit', function (event) {
+      event.preventDefault();
 
-            var title = document.getElementById('title-input').value;
-            var content = document.getElementById('content-input').value;
+      var title = document.getElementById('title-input').value;
+      var content = document.getElementById('content-input').value;
 
-            if (title.trim() !== '' && content.trim() !== '') {
-                createPost(title, content);
-            }
-        });
+      if (title.trim() !== '' && content.trim() !== '') {
+        createPost(title, content);
+      }
+    });
 
-        // Carregar os posts ao carregar a página
-        document.addEventListener('DOMContentLoaded', function () {
-            loadPosts();
-        });
-    </script>
+    // Carregar os posts ao carregar a página
+    document.addEventListener('DOMContentLoaded', function () {
+      loadPosts();
+    });
+  </script>
 </body>
 </html>
