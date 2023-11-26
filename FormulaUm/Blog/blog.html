@@ -55,11 +55,26 @@
         postContent.classList.add('post-content');
         postContent.textContent = post.content;
 
+        var createButton = document.createElement('button');
+        createButton.textContent = 'Criar';
+        createButton.addEventListener('click', function () {
+        var newTitle = titleInput.value;
+        var newContent = contentInput.value;
+        var confirmCreate = confirm('Tem certeza que deseja criar um novo post?');
+        if (confirmCreate) {
+          createPost(newTitle, newContent);
+        }
+       });
+
         var deleteButton = document.createElement('button');
         deleteButton.classList.add('delete-button');
-        deleteButton.textContent = 'X';
+        deleteButton.textContent = 'Excluir';
         deleteButton.addEventListener('click', function () {
-          deletePost(post.id);
+          var confirmDelete = confirm('Tem certeza que deseja excluir este post?');
+          if (confirmDelete) {
+            deletePost(post.id);
+            // Resto do código...
+          }
         });
 
         var editButton = document.createElement('button');
@@ -90,18 +105,19 @@
 }
 
 function createPost(title, content) {
-  var xhr = new XMLHttpRequest();
-  xhr.open('POST', apiURL, true);
-  xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-  xhr.onload = function () {
-    if (xhr.status === 201) {
-      document.getElementById('title-input').value = '';
-      document.getElementById('content-input').value = '';
-      loadPosts();
-    }
-  };
-  xhr.send('action=create_post&title=' + encodeURIComponent(title) + '&content=' + encodeURIComponent(content));
-}
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', apiURL, true);
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.onload = function () {
+      if (xhr.status === 201) {
+        document.getElementById('title-input').value = '';
+        document.getElementById('content-input').value = '';
+        loadPosts();
+        alert('Novo post criado com sucesso!');
+      }
+    };
+    xhr.send('action=create_post&title=' + encodeURIComponent(title) + '&content=' + encodeURIComponent(content));
+  }
 
 function deletePost(postId) {
   var xhr = new XMLHttpRequest();
@@ -146,8 +162,11 @@ function openEditPopup(post) {
   saveButton.addEventListener('click', function () {
     var newTitle = titleInput.value;
     var newContent = contentInput.value;
-    editPost(post.id, newTitle, newContent);
-    closeEditPopup();
+    var confirmEdit = confirm('Tem certeza que deseja salvar as alterações?');
+    if (confirmEdit) {
+      editPost(post.id, newTitle, newContent);
+      closeEditPopup();
+    }
   });
   editPopup.appendChild(saveButton);
 
