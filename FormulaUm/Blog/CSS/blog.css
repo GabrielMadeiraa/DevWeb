@@ -12,6 +12,7 @@ body {
   select,
   textarea {
     width: 100%;
+    margin-left: 10px;
     padding: 10px;
     margin-bottom: 15px;
     border: 1px solid #ccc;
@@ -94,8 +95,26 @@ body {
     padding-top: 50px;
     text-align: center;
     color: #e10600;
+    text-shadow: 1px 1px 2px white, 0 0 25px darkred, 0 0 5px #e10600;
     font-weight: bolder;
     font-size: 40px;
+  }
+
+  h2{
+    padding-top: 50px;
+    padding-bottom: 25px;
+    text-align: center;
+    color: #e10600;
+    font-weight: bolder;
+    font-size: 30px;
+  }
+
+  h3{
+    padding-left: 15px;
+    color: #e10600;
+    text-shadow: 1px 1px 2px white, 0 0 25px darkred, 0 0 5px #e10600;
+    font-weight: bolder;
+    font-size: 20px;
   }
   
   .edit-popup {
@@ -148,4 +167,33 @@ body {
   
   .post button:active {
     background-color: rgb(199, 43, 22);
+  }
+
+  .tabela {
+    margin-top: 0px;
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    border: 5px solid rgb(241, 37, 10);
+  }
+
+  .button {
+    margin-left: 10px;
+    transition-duration: 0.4s;
+    background-color: #e10600; 
+    border-radius: 12px;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    font-weight: bolder;
+    display: inline-block;
+    font-size: 16px;
+  }
+  
+  .button:hover {
+    background-color: white; 
+    color: #e10600;
+    border: 5px solid #e10600; 
   }

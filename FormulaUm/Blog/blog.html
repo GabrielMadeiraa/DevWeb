@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Blog de Fórmula 1</title>
+  <title>Fórum de Fórmula 1</title>
   <link rel="stylesheet" href="CSS/blog.css">
 </head>
 <body>  
@@ -14,20 +14,24 @@
       <th> <a href="../Equipes/equipes.html"> Equipes</a> </th>
       <th><a href="../Sobre/sobre.html"> Sobre Nós</a></th> 
       <th> <a href="../Formulario/formulario.html"> Contato</a> </th>   
-      <th> <a href="blog.html"> Blog</a> </th>   
+      <th> <a href="blog.html"> Fórum</a> </th>   
     </tr>
   </table> 
-  <h1>Blog - Fórmula 1</h1>
+  <h1>Fórum - Fórmula 1</h1>
+  <h2>Um lugar para debater e compartilhar pensamentos entre os entusiastas de F1</h2>
+
 
   <div id="posts-container"></div>
-
+<table>
+  <td class="tabela">
   <form id="new-post-form">
-    <h2>Novo Post</h2>
+    <h3>Novo Post</h3>
     <input type="text" id="title-input" placeholder="Título" required>
     <textarea id="content-input" placeholder="Conteúdo" required></textarea>
-    <button type="submit">Publicar</button>
+    <button class="button" type="submit">Publicar</button>
   </form>
-
+  <td>
+</table>
   <script>
     // Defina a URL da API PHP
     var apiURL = 'http://localhost/projeto/DevWebCRUD/api.php';
