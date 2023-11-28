@@ -19,7 +19,7 @@
   </table> 
   <h1>Contato Fórmula 1</h1>
 
-  <form action="processar-formulario.php" method="POST">
+  <form id="new-form">
     <label for="nome">Nome:</label>
     <input type="text" id="nome" name="nome" required>
 
@@ -40,7 +40,6 @@
       <option value="mercedesAmg">Mercedes-AMG Petronas</option>
       <option value="redbull">Red Bull Racing</option>
       <option value="williams">Williams</option>
-      <!-- Adicione outras equipes da Fórmula 1 aqui -->
     </select>
 
     <label for="comentario">Comentário:</label>
@@ -95,7 +94,60 @@
         <option value="Logan Sargeant">Logan Sargeant</option>
       </optgroup>
     </select>
-    <input type="submit" value="Enviar">
+    <input type="hidden" name="action" id="registro" value="create_registro">
+    <button class="button" type="submit">Publicar</button>
   </form>
 </body>
 </html>
+<script>
+  function enviarFormulario() {
+  var nome = document.getElementById('nome').value;
+  var email = document.getElementById('email').value;
+  var idade = document.getElementById('idade').value;
+  var equipe = document.getElementById('equipe').value;
+  var comentario = document.getElementById('comentario').value;
+  var numero = document.getElementById('numero').value;
+  var cor = document.getElementById('cor').value;
+  var piloto = document.getElementById('pilotos').value;
+  var registro = document.getElementById('registro').value;
+
+  var formData = {
+    nome: nome,
+    email: email,
+    idade: idade,
+    equipe: equipe,
+    comentario: comentario,
+    numero: numero,
+    cor: cor,
+    piloto: piloto,
+    create_registro: registro
+  };
+
+  fetch('http://localhost/projeto/DevWebCRUD/api.php', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(formData)
+  })
+  .then(function(response) {
+    if (response.ok) {
+      return response.json();
+    } else {
+      throw new Error('Erro na solicitação da API: ' + response.status);
+    }
+  })
+  .then(function(data) {
+    console.log(data);
+    // Faça algo com os dados retornados, como exibir uma mensagem de sucesso
+  })
+  .catch(function(error) {
+    console.error(error);
+  });
+}
+
+document.getElementById('new-form').addEventListener('submit', function(event) {
+  event.preventDefault();
+  enviarFormulario();
+});
+</script>
