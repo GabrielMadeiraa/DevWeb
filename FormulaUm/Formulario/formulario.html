@@ -101,6 +101,7 @@
 </html>
 <script>
   function enviarFormulario() {
+    
   var nome = document.getElementById('nome').value;
   var email = document.getElementById('email').value;
   var idade = document.getElementById('idade').value;
@@ -120,7 +121,7 @@
     numero: numero,
     cor: cor,
     piloto: piloto,
-    create_registro: registro
+    action: registro
   };
 
   fetch('http://localhost/projeto/DevWebCRUD/api.php', {
