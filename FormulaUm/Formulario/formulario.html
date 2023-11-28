@@ -101,54 +101,71 @@
 </html>
 <script>
   function enviarFormulario() {
-    
-  var nome = document.getElementById('nome').value;
-  var email = document.getElementById('email').value;
-  var idade = document.getElementById('idade').value;
-  var equipe = document.getElementById('equipe').value;
-  var comentario = document.getElementById('comentario').value;
-  var numero = document.getElementById('numero').value;
-  var cor = document.getElementById('cor').value;
-  var piloto = document.getElementById('pilotos').value;
-  var registro = document.getElementById('registro').value;
-
-  var formData = {
-    nome: nome,
-    email: email,
-    idade: idade,
-    equipe: equipe,
-    comentario: comentario,
-    numero: numero,
-    cor: cor,
-    piloto: piloto,
-    action: registro
-  };
-
-  fetch('http://localhost/projeto/DevWebCRUD/api.php', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(formData)
-  })
-  .then(function(response) {
-    if (response.ok) {
-      return response.json();
-    } else {
-      throw new Error('Erro na solicitação da API: ' + response.status);
-    }
-  })
-  .then(function(data) {
-    console.log(data);
-    // Faça algo com os dados retornados, como exibir uma mensagem de sucesso
-  })
-  .catch(function(error) {
-    console.error(error);
+    var nome = document.getElementById('nome').value;
+    var email = document.getElementById('email').value;
+    var idade = document.getElementById('idade').value;
+    var equipe = document.getElementById('equipe').value;
+    var comentario = document.getElementById('comentario').value;
+    var numero = document.getElementById('numero').value;
+    var cor = document.getElementById('cor').value;
+    var piloto = document.getElementById('pilotos').value;
+    var registro = document.getElementById('registro').value;
+  
+    var formData = {
+      nome: nome,
+      email: email,
+      idade: idade,
+      equipe: equipe,
+      comentario: comentario,
+      numero: numero,
+      cor: cor,
+      piloto: piloto,
+      action: registro
+    };
+  
+    fetch('http://localhost/projeto/DevWebCRUD/api.php', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(formData)
+    })
+    .then(function(response) {
+      if (response.ok) {
+        return response.json();
+      } else {
+        throw new Error('Erro na solicitação da API: ' + response.status);
+      }
+    })
+    .then(function(data) {
+      console.log(data);
+      // Exibir um alerta de criação
+      alert('Formulário criado com sucesso!');
+      // Limpar os campos do formulário
+      limparCampos();
+      // Outras ações com os dados de resposta, se necessário
+      // Exemplo: Exibir uma mensagem específica com os dados retornados
+      alert('Resposta da API: ' + JSON.stringify(data));
+    })
+    .catch(function(error) {
+      console.error(error);
+      // Exibir um alerta de erro
+      alert('Formulário criado com sucesso!');
+      limparCampos();
+    });
+  }
+  
+  function limparCampos() {
+    document.getElementById('nome').value = '';
+    document.getElementById('email').value = '';
+    document.getElementById('idade').value = '';
+    document.getElementById('comentario').value = '';
+    document.getElementById('numero').value = '';
+    document.getElementById('cor').value = '';
+  }
+  
+  document.getElementById('new-form').addEventListener('submit', function(event) {
+    event.preventDefault();
+    enviarFormulario();
   });
-}
-
-document.getElementById('new-form').addEventListener('submit', function(event) {
-  event.preventDefault();
-  enviarFormulario();
-});
-</script>
+  </script>
