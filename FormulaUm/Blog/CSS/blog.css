@@ -213,4 +213,10 @@ body {
 
   div#posts-container{
     text-align: center;
+    padding-top: 50px;
+    padding-bottom: 25px;
+    text-align: center;
+    color: #e10600;
+    font-weight: bolder;
+    font-size: 25px;
   }
