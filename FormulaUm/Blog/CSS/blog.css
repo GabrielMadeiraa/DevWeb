@@ -210,3 +210,7 @@ body {
     background-color: red;
     color: white;
   }
+
+  div#posts-container{
+    text-align: center;
+  }
